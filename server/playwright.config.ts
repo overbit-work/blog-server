@@ -26,6 +26,15 @@ export default defineConfig({
   reporter: process.env.CI ? "github" : "list",
   projects: [
     {
+      name: "global setup",
+      testMatch: /global\.setup\.ts/,
+      teardown: "global cleanup",
+    },
+    {
+      name: "global cleanup",
+      testMatch: /global\.teardown\.ts/,
+    },
+    {
       name: "integration",
       testMatch: /integration/,
       dependencies: ["global setup"],
