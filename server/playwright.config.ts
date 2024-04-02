@@ -1,13 +1,4 @@
-import { defineConfig, devices } from "@playwright/test";
-import { randomUUID } from "crypto";
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
-
-process.env.TEST_RUN_ID = process.env.TEST_RUN_ID ?? randomUUID().split("-")[0];
+import { defineConfig } from "@playwright/test";
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -24,26 +15,6 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: process.env.CI ? "github" : "list",
-  projects: [
-    {
-      name: "global setup",
-      testMatch: /global\.setup\.ts/,
-      teardown: "global cleanup",
-    },
-    {
-      name: "global cleanup",
-      testMatch: /global\.teardown\.ts/,
-    },
-    {
-      name: "integration",
-      testMatch: /integration/,
-      dependencies: ["global setup"],
-    },
-  ],
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    // All requests we send go to this API endpoint.
-    baseURL: process.env.INTEGRATION_TEST_BASE_URL ?? "http://localhost:3000",
-    extraHTTPHeaders: {},
-  },
+  globalSetup: require.resolve("./tests/integration/global.setup"),
+  globalTeardown: require.resolve("./tests/integration/global.teardown"),
 });

@@ -1,0 +1,1 @@
+export const TEST_ENVIRONMENT_NAME = "blog-server-integration-test"

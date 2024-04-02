@@ -1,17 +1,18 @@
-import { test as teardown } from "@playwright/test";
+import { type FullConfig } from "@playwright/test";
 import { v2 as compose } from "docker-compose";
 import path from "path";
+import { TEST_ENVIRONMENT_NAME } from "./constant";
 
-teardown("teardown test environment", async ({}) => {
-  teardown.slow();
+async function globalTeardown(config: FullConfig) {
   const dockerComposeDir = path.resolve(__dirname, "../..");
   const dockerComposeOptions: compose.IDockerComposeOptions = {
     cwd: dockerComposeDir,
     composeOptions: [
-      `--project-name=integration-test-${process.env.TEST_RUN_ID}`,
+      `--project-name=${TEST_ENVIRONMENT_NAME}`,
     ],
     commandOptions: ["-v"],
   };
 
   await compose.downAll(dockerComposeOptions);
-});
+}
+export default globalTeardown;
