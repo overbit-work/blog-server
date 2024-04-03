@@ -4,6 +4,7 @@ import { getRandomPort } from "get-port-please";
 import { type FullConfig } from "@playwright/test";
 import { randomUUID } from "crypto";
 import { TEST_ENVIRONMENT_NAME } from "./constant";
+import { seed } from "./seed";
 
 const verbose = process.env.VERBOSE ? true : false;
 const SERVER_START_TIMEOUT = 30000;
@@ -37,7 +38,7 @@ async function globalSetup(config: FullConfig) {
   await compose.downAll(dockerComposeOptions);
   await compose.upAll({
     ...dockerComposeOptions,
-    commandOptions: ["--build", "--force-recreate"],
+    // commandOptions: ["--build", "--force-recreate"],
   });
 
   compose
@@ -73,6 +74,8 @@ async function globalSetup(config: FullConfig) {
 
   process.env.TEST_SERVER_BASE_URL = `http://localhost:${port}`;
   process.env.TEST_DB_PORT = String(dbPort);
+
+  await seed(dbPort);
 }
 
 export default globalSetup;

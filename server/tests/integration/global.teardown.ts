@@ -4,12 +4,11 @@ import path from "path";
 import { TEST_ENVIRONMENT_NAME } from "./constant";
 
 async function globalTeardown(config: FullConfig) {
+  console.info("Tearing down test environment...");
   const dockerComposeDir = path.resolve(__dirname, "../..");
   const dockerComposeOptions: compose.IDockerComposeOptions = {
     cwd: dockerComposeDir,
-    composeOptions: [
-      `--project-name=${TEST_ENVIRONMENT_NAME}`,
-    ],
+    composeOptions: [`--project-name=${TEST_ENVIRONMENT_NAME}`],
     commandOptions: ["-v"],
   };
 

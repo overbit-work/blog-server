@@ -54,6 +54,7 @@
     "@nestjs/cli": "^10.1.18",
     "@nestjs/testing": "^10.2.7",
     "@playwright/test": "^1.42.1",
+    "@snaplet/copycat": "^5.0.0",
     "@types/express": "^4.17.19",
     "@types/graphql-type-json": "0.3.3",
     "@types/jest": "^29.5.5",
