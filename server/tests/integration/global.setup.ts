@@ -38,7 +38,7 @@ async function globalSetup(config: FullConfig) {
   await compose.downAll(dockerComposeOptions);
   await compose.upAll({
     ...dockerComposeOptions,
-    // commandOptions: ["--build", "--force-recreate"],
+    commandOptions: ["--build", "--force-recreate"],
   });
 
   compose
