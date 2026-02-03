@@ -29,7 +29,7 @@ on:
 jobs:
   configure:
     name: configure deployment target component
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-20.04
     outputs:
       component: ${{ steps.component-identifier.outputs.component }}
     steps:
@@ -45,7 +45,7 @@ jobs:
 
   package:
     name: package
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-20.04
     needs: configure
     steps:
       - name: checkout

@@ -24,7 +24,7 @@ jobs:
     environment:
       name: ${{ inputs.environment-name }}
       url: ${{ vars.AMPLICATION_URL }}
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     steps:
       - name: aws credentials
         uses: aws-actions/configure-aws-credentials@v1-node16

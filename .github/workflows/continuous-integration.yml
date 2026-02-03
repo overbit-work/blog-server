@@ -12,7 +12,7 @@ on:
 jobs:
   continuous-integration:
     name: continuous-integration
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         projects: [admin-ui, server]
@@ -36,7 +36,7 @@ jobs:
 
   configure:
     name: configure deployment target environment
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-20.04
     outputs:
       environment: ${{ steps.environment-identifier.outputs.environment }}
     steps:
